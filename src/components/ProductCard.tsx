@@ -3,14 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export interface Product {
   id: number
-  sku: string
   name: string
   category: string
   image?: string
   dimensions?: string
   weight?: string
   voltage?: string
-  norma?: string
+  certificacao?: string
   description: string
 }
 
@@ -48,10 +47,7 @@ export default function ProductCard({ product }: Props) {
               <span className="text-xs">Sem imagem</span>
             </div>
           )}
-          {/* SKU badge */}
-          <span className="absolute top-2 left-2 text-[10px] font-bold bg-green/20 text-green px-2 py-0.5 rounded-md border border-green/30">
-            {product.sku}
-          </span>
+
         </div>
 
         {/* Content */}
@@ -103,7 +99,7 @@ export default function ProductCard({ product }: Props) {
                   {product.image ? (
                     <img src={product.image} alt={product.name} className="max-w-full max-h-64 object-contain" />
                   ) : (
-                    <div className="text-gray-300 text-4xl font-display font-black">{product.sku}</div>
+                    <div className="text-gray-300 text-4xl font-display font-black">Sem imagem</div>
                   )}
                 </div>
 
@@ -112,7 +108,6 @@ export default function ProductCard({ product }: Props) {
                   <div>
                     <span className="section-label text-[10px]">{product.category}</span>
                     <h2 className="font-display font-bold text-xl text-gray-900 mt-1 leading-tight">{product.name}</h2>
-                    <p className="text-xs text-gray-400 mt-1">SKU: {product.sku}</p>
                   </div>
 
                   <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
@@ -123,11 +118,11 @@ export default function ProductCard({ product }: Props) {
                       ['Dimensões', product.dimensions],
                       ['Peso', product.weight],
                       ['Tensão', product.voltage],
-                      ['Norma', product.norma],
+                      ['Certificação', product.certificacao],
                     ]
                       .filter(([, v]) => v)
                       .map(([label, value]) => (
-                        <div key={label} className="flex justify-between text-sm border-b border-gray-100 pb-1.5">
+                        <div key={label as string} className="flex justify-between text-sm border-b border-gray-100 pb-1.5">
                           <span className="text-gray-400">{label}</span>
                           <span className="text-gray-900 font-medium">{value}</span>
                         </div>
@@ -136,7 +131,7 @@ export default function ProductCard({ product }: Props) {
 
                   <div className="flex flex-col gap-2 mt-auto pt-2">
                     <a
-                      href={`mailto:contato@albernazelectric.com.br?subject=Orçamento – ${product.sku}: ${product.name}`}
+                      href={`mailto:contato@albernazelectric.com.br?subject=Orçamento – ${product.name}`}
                       className="btn-primary justify-center text-xs"
                     >
                       Solicitar Orçamento

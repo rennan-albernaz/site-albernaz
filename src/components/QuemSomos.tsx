@@ -2,9 +2,9 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const highlights = [
-  { icon: '🏭', title: 'Fabricação', text: 'Fabricação e montagem de painéis elétricos.' },
-  { icon: '⚙️', title: 'Engenharia', text: 'Engenharia e projetos elétricos personalizados.' },
-  { icon: '🔧', title: 'ASTEC', text: 'Assistência Técnica Autorizada WEG.' },
+  { icon: '📃', title: 'Certificação', text: 'Produtos certificados pelos mais rigorosos padrões nacionais e internacionais, incluindo IEC 61439 e ABNT NBR IEC 60439.' },
+  { icon: '📞', title: 'Suporte', text: 'Atendimento técnico disponível 24 horas por dia, 7 dias por semana, para garantir a continuidade da sua operação.' },
+  { icon: '🔧', title: 'ASTEC', text: 'Assistência Técnica Autorizada WEG. Suporte especializado em inversores de frequência e soft-starters de baixa tensão.' },
 ]
 
 export default function QuemSomos() {
@@ -34,19 +34,22 @@ export default function QuemSomos() {
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed text-base">
               <p>
-                O <strong className="text-gray-900">Grupo Albernaz Electric</strong> é uma empresa brasileira especializada na
-                fabricação de painéis elétricos, quadros de distribuição e componentes de media e baixa tensão.
-                Com unidades em <strong className="text-gray-900">João Pinheiro (MG)</strong> e{' '}
-                <strong className="text-gray-900">Catalão (GO)</strong>, atendemos indústrias de grande porte
-                em todo o território nacional.
+                Fundada em 14 de outubro de 2010 em João Pinheiro, Minas Gerais, a<strong className="text-gray-900"> Albernaz Electric </strong>nasceu com o propósito de fornecer soluções de alta 
+                qualidade para o setor elétrico industrial. Ao longo de mais de uma década, construímos uma reputação sólida baseada na excelência 
+                técnica e no compromisso com a satisfação do cliente.
               </p>
+
               <p>
+                Hoje, o <strong className="text-gray-900">Grupo Albernaz Electric</strong> consolidou-se como uma empresa brasileira referência na fabricação de painéis elétricos, quadros de distribuição e componentes de média e baixa tensão. 
+                Com unidades estrategicamente localizadas em <strong className="text-gray-900">João Pinheiro (MG) e Catalão (GO)</strong>, atendemos indústrias de grande porte em todo o território nacional, oferecendo produtos e serviços que 
+                combinam tecnologia de ponta com a confiabilidade que o mercado exige.
+              </p>
+
+              <p>
+                Nossa estrutura verticalizada integra o ciclo completo — do projeto ao produto pronto — com controle total de qualidade em cada etapa. Além da nossa força fabril, somos <strong className="text-gray-900">Assistência 
+                Técnica Autorizada WEG</strong>, oferecendo toda a linha de componentes e suporte técnico certificado para energizar o sucesso do seu negócio com rapidez e precisão.
                 Nossa estrutura verticalizada integra o ciclo completo — do projeto ao produto pronto —
                 com controle total de qualidade em cada etapa.
-              </p>
-              <p>
-                Somos assistência técnica autorizados <strong className="text-gray-900">WEG</strong>, oferecendo
-                toda a linha de componentes e assistência técnica certificada.
               </p>
             </div>
 

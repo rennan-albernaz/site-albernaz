@@ -20,7 +20,7 @@ export default function Catalogo() {
     if (search.trim()) {
       const q = search.toLowerCase()
       list = list.filter(
-        (p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q)
+        (p) => p.name.toLowerCase().includes(q)
       )
     }
     return list
@@ -127,7 +127,7 @@ export default function Catalogo() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-white border border-gray-200 pl-9 pr-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 rounded-xl transition-colors"
-              placeholder="Buscar por nome ou SKU…"
+              placeholder="Buscar por nome"
             />
           </div>
         </div>

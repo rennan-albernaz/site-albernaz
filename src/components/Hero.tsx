@@ -80,7 +80,7 @@ export default function Hero() {
       <div className="absolute bottom-16 left-0 right-0 hidden lg:flex justify-center gap-0" style={{ zIndex: 3 }}>
         {[
           { value: '2.000+', label: 'Projetos entregues' },
-          { value: '50+', label: 'Parceiros' },
+          { value: '300+', label: 'Parceiros & Clientes' },
           { value: '25+', label: 'Anos de mercado' },
         ].map((stat, i) => (
           <div

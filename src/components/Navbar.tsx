@@ -93,12 +93,10 @@ export default function Navbar() {
                   key={link.label}
                   onClick={() => handleNavClick(link.href)}
                   className={`text-lg font-semibold tracking-wide transition-colors relative group ${
-                    link.label === 'Produtos' && isSobreImagemFundo
+                    isSobreImagemFundo
                       ? 'text-white hover:text-green-light'
-                      : isSobreImagemFundo
-                        ? 'text-white hover:text-green-light'
-                        : 'text-gray-800 hover:text-green'
-                  }${isCatalogo ? ' text-gray-800 hover:text-green' : ''}`}
+                      : 'text-gray-800 hover:text-green'
+                  }`}
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green group-hover:w-full transition-all duration-300" />
@@ -108,12 +106,10 @@ export default function Navbar() {
                   key={link.label}
                   to={link.href}
                   className={`text-lg font-semibold tracking-wide transition-colors relative group ${
-                    link.label === 'Produtos' && isSobreImagemFundo
+                    isSobreImagemFundo
                       ? 'text-white hover:text-green-light'
-                      : isSobreImagemFundo
-                        ? 'text-white hover:text-green-light'
-                        : 'text-gray-800 hover:text-green'
-                  }${isCatalogo ? ' text-gray-800 hover:text-green' : ''}`}
+                      : 'text-gray-800 hover:text-green'
+                  }`}
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green group-hover:w-full transition-all duration-300" />
@@ -123,7 +119,7 @@ export default function Navbar() {
             <a
               href="/#contato"
               onClick={() => handleNavClick('/#contato')}
-              className={`btn-primary ml-8 ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : ''}${isCatalogo ? ' !bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white' : ''}`}
+              className={`btn-primary ml-8 ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white'}`}
             >
               Solicitar Orçamento
             </a>
@@ -155,27 +151,27 @@ export default function Navbar() {
           >
             <nav className="flex flex-col px-8 py-5 gap-5">
               {navLinks.map((link) =>
-                link.href.startsWith('/#') ? (
-                  <button
-                    key={link.label}
-                    onClick={() => handleNavClick(link.href)}
-                    className={`text-base font-semibold text-left transition-colors ${isSobreImagemFundo ? 'text-white hover:text-green-light' : 'text-gray-700 hover:text-green'}${isCatalogo ? ' text-gray-800 hover:text-green' : ''}`}
-                  >
-                    {link.label}
-                  </button>
-                ) : (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className={`text-base font-semibold transition-colors ${isSobreImagemFundo ? 'text-white hover:text-green-light' : 'text-gray-700 hover:text-green'}${isCatalogo ? ' text-gray-800 hover:text-green' : ''}`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              )}
+                  link.href.startsWith('/#') ? (
+                    <button
+                      key={link.label}
+                      onClick={() => handleNavClick(link.href)}
+                      className={`text-base font-semibold text-left transition-colors ${isSobreImagemFundo ? 'text-white hover:text-green-light' : 'text-gray-700 hover:text-green'}`}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      className={`text-base font-semibold transition-colors ${isSobreImagemFundo ? 'text-white hover:text-green-light' : 'text-gray-700 hover:text-green'}`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               <button
                 onClick={() => handleNavClick('/#contato')}
-                className={`btn-primary self-start ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : ''}${isCatalogo ? ' !bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white' : ''}`}
+                className={`btn-primary self-start ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white'}`}
               >
                 Solicitar Orçamento
               </button>

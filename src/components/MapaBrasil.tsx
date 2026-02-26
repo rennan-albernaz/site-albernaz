@@ -53,9 +53,6 @@ export default function MapaBrasil() {
 
   return (
     <section className="relative py-28 overflow-hidden bg-gray-50">
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23247034' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}} />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-green/5 rounded-full blur-3xl pointer-events-none" />
-
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Header */}
         <motion.div
@@ -75,55 +72,40 @@ export default function MapaBrasil() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* ── Map ─────────────────────────────────────────── */}
+          {/* ── Mapa Único ─────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="relative"
+            className="flex justify-center items-center w-full"
           >
-            <div className="relative w-full aspect-[3/4] max-w-sm mx-auto">
-              {/* Mapa 3D do Brasil */}
-              <div className="w-full h-full bg-white rounded-3xl border border-gray-200 shadow-sm flex items-center justify-center overflow-hidden">
-                <img
-                  src="/assets/mapa-brasil.png"
-                  alt="Mapa 3D do Brasil com unidades Albernaz"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                  style={{ filter: 'drop-shadow(0 8px 32px rgba(36,112,52,0.18))' }}
-                  onError={(e) => {
-                    ;(e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
-                {/* Fallback SVG caso a imagem não exista */}
-                <svg
-                  viewBox="0 0 400 520"
-                  className="absolute inset-0 w-full h-full p-8 opacity-20"
-                  fill="currentColor"
-                >
-                  <path
-                    className="text-green"
-                    d="M200 20 C160 30 120 45 90 70 C60 95 40 130 30 165 C20 200 25 240 40 270
-                       C55 300 80 325 85 360 C90 395 75 430 90 455 C105 480 140 490 170 495
-                       C200 500 235 490 260 475 C285 460 300 435 310 408 C320 381 315 350 330 328
-                       C345 306 370 295 375 270 C380 245 365 215 360 190 C355 165 355 135 340 112
-                       C325 89 295 78 270 60 C245 42 230 15 200 20Z"
-                  />
-                </svg>
-                {/* Pin markers */}
-                {units.map((unit) => (
-                  <div
-                    key={unit.id}
-                    style={{ top: unit.top, left: unit.left }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 z-10 group"
-                  >
-                    <span className="map-pin block" />
-                    {/* Tooltip */}
-                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
-                      {unit.city}, {unit.state}
-                    </span>
-                  </div>
-                ))}
+            <div className="relative w-full max-w-2xl mx-auto">
+              <img
+                src="/assets/mapa1.png"
+                alt="Mapa Nacional Albernaz"
+                className="w-full h-auto object-contain rounded-3xl border border-gray-200 shadow-sm"
+                style={{ minHeight: '400px', background: '#fff' }}
+                loading="lazy"
+              />
+              {/* Bolinha direita (João Pinheiro) - subir */}
+              <div
+                className="absolute z-10 group"
+                style={{ top: '54%', left: '67.5%' }}
+              >
+                <span className="block w-5 h-5 bg-green rounded-full border-2 border-white shadow-lg cursor-pointer transition-transform group-hover:scale-110" />
+                <span className="absolute left-1/2 -translate-x-1/2 -top-12 whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                  Fábrica & Loja | João Pinheiro - MG
+                </span>
+              </div>
+              {/* Bolinha esquerda (Catalão) - subir */}
+              <div
+                className="absolute z-10 group"
+                style={{ top: '55.2%', left: '59.9%' }}
+              >
+                <span className="block w-5 h-5 bg-green rounded-full border-2 border-white shadow-lg cursor-pointer transition-transform group-hover:scale-110" />
+                <span className="absolute left-1/2 -translate-x-1/2 -top-12 whitespace-nowrap bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                  Filial | Catalão - GO
+                </span>
               </div>
             </div>
           </motion.div>
