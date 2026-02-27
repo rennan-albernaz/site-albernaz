@@ -19,7 +19,7 @@ export const products: Product[] = [
     id: 1,
     name: 'Quadro de Comando VNA-10',
     category: 'VNA',
-    image: undefined,
+    image: '/assets/video-painel.mp4', // Usando vídeo como "imagem"
     dimensions: '800 mm á 1200 mm',
     weight: '2.8 kg ou Proteção',
     voltage: 'Até 4000A',

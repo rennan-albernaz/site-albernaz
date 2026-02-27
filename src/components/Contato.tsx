@@ -21,7 +21,7 @@ export default function Contato() {
   }
 
   const contactInfo = [
-    { icon: '📍', label: 'Sede', value: 'João Pinheiro – MG, Brasil' },
+    { icon: '📍', label: 'Fábrica', value: 'João Pinheiro – MG, Brasil' },
     { icon: '🏪', label: 'Loja Elétrica', value: 'João Pinheiro - MG, Brasil' },
     { icon: '🏭', label: 'Filial', value: 'Catalão – GO, Brasil' },
     { icon: '📞', label: 'Telefone', value: '+55 (38) 3561-4522' },

@@ -32,12 +32,31 @@ export default function ProductCard({ product }: Props) {
         {/* Image area */}
         <div className="aspect-square bg-gray-100 relative flex items-center justify-center overflow-hidden">
           {product.image ? (
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-contain p-4"
-              loading="lazy"
-            />
+            product.image.endsWith('.mp4') ? (
+              <video
+                src={product.image}
+                className="w-full h-full object-cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', margin: 0, padding: 0, background: 'transparent' }}
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/assets/cnc.jpeg"
+                tabIndex={-1}
+                controls={false}
+                disablePictureInPicture
+                controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+              >
+                Seu navegador não suporta o elemento de vídeo.
+              </video>
+            ) : (
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            )
           ) : (
             <div className="flex flex-col items-center gap-2 text-gray-300">
               <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +66,6 @@ export default function ProductCard({ product }: Props) {
               <span className="text-xs">Sem imagem</span>
             </div>
           )}
-
         </div>
 
         {/* Content */}
@@ -80,7 +98,7 @@ export default function ProductCard({ product }: Props) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative bg-white rounded-3xl overflow-hidden w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-gray-200 shadow-2xl"
+              className="relative bg-white rounded-3xl overflow-hidden w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-200 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close */}
@@ -95,9 +113,31 @@ export default function ProductCard({ product }: Props) {
 
               <div className="grid md:grid-cols-2">
                 {/* Image panel */}
-                <div className="bg-gray-100 aspect-square md:aspect-auto flex items-center justify-center p-8 min-h-[260px]">
+                <div
+                  className="bg-gray-100 aspect-square md:aspect-auto flex items-center justify-center min-h-[260px]"
+                  style={{ padding: 0, margin: 0, border: 'none', height: '100%', display: 'flex', overflow: 'hidden' }}
+                >
                   {product.image ? (
-                    <img src={product.image} alt={product.name} className="max-w-full max-h-64 object-contain" />
+                    product.image.endsWith('.mp4') ? (
+                      <video
+                        src={product.image}
+                        className="w-full h-full pointer-events-none select-none"
+                        style={{ width: '100% !important', height: '100% !important', objectFit: 'cover', objectPosition: 'center' }}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        poster="/assets/cnc.jpeg"
+                        tabIndex={-1}
+                        controls={false}
+                        disablePictureInPicture
+                        controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+                      >
+                        Seu navegador não suporta o elemento de vídeo.
+                      </video>
+                    ) : (
+                      <img src={product.image} alt={product.name} className="max-w-full max-h-64 object-contain" />
+                    )
                   ) : (
                     <div className="text-gray-300 text-4xl font-display font-black">Sem imagem</div>
                   )}
@@ -114,11 +154,11 @@ export default function ProductCard({ product }: Props) {
 
                   {/* Specs */}
                   <div className="space-y-2">
+                    {/* Dimensões, Peso, Tensão */}
                     {[
                       ['Dimensões', product.dimensions],
                       ['Peso', product.weight],
                       ['Tensão', product.voltage],
-                      ['Certificação', product.certificacao],
                     ]
                       .filter(([, v]) => v)
                       .map(([label, value]) => (
@@ -127,6 +167,14 @@ export default function ProductCard({ product }: Props) {
                           <span className="text-gray-900 font-medium">{value}</span>
                         </div>
                       ))}
+
+                    {/* Certificação na mesma linha, separado por espaço */}
+                    {product.certificacao && (
+                      <div className="flex justify-between text-sm border-b border-gray-100 pb-1.5">
+                        <span className="text-gray-400">Certificação</span>
+                        <span className="text-gray-900 font-medium ml-1">{product.certificacao}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-2 mt-auto pt-2">

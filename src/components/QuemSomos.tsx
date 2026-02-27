@@ -72,14 +72,20 @@ export default function QuemSomos() {
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            {/* Main image */}
+            {/* Main video */}
             <div className="relative rounded-3xl overflow-hidden h-[560px] bg-gray-100 border border-gray-200">
-              <img
+              <video
                 src="/assets/cnc.jpeg"
-                alt="Máquinas CNC de corte a laser Albernaz Electric"
                 className="absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-              />
+                controls
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/assets/cnc.jpeg"
+              >
+                Seu navegador não suporta o elemento de vídeo.
+              </video>
               {/* Corner accent */}
               <div className="absolute top-4 left-4 bg-white/90 border border-green/30 rounded-xl px-3 py-1.5 text-xs font-semibold text-green">
                 Padrão Albernaz

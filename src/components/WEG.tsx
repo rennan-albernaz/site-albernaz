@@ -62,7 +62,7 @@ export default function WEG() {
             <h2 className="section-title mb-6">Autoridade Técnica WEG</h2>
             <p className="text-gray-600 leading-relaxed mb-8">
               Como Assistência Técnica Autorizada WEG, entregamos suporte especializado em inversores 
-              de frequência e soft-starters de baixa tensão, unindo consultoria avançada e precisão técnica 
+              de frequência e soft-starters de baixa tensão, trazendo assim precisão técnica 
               para garantir a continuidade da sua operação.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -76,14 +76,7 @@ export default function WEG() {
               >
                 Falar com Especialista
               </a>
-              <a
-                href="https://www.weg.net/catalog/weg/BR/pt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-              >
-                Catálogo WEG
-              </a>
+
             </div>
           </motion.div>
 
