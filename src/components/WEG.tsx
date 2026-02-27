@@ -47,7 +47,7 @@ export default function WEG() {
           <img
             src="/assets/logo-weq.png"
             alt="WEG"
-            className="h-24 w-auto object-contain"
+            className="h-36 w-auto object-contain"
           />
         </motion.div>
 

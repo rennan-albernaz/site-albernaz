@@ -195,7 +195,7 @@ export default function Contato() {
             {/* Mapa com localização da Albernaz */}
             <div className="glass-card rounded-2xl overflow-hidden aspect-video">
               <iframe
-                src="https://www.google.com/maps/d/embed?mid=1MwegHLXEEx3f9xu89gMeFNcTghQonNY&ehbc=2E312F"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.3077752892!2d-46.1933387888931!3d-17.730131573523142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94abe267e8a8a1f9%3A0xc680878c5c62e409!2sAlbernaz%20Service!5e0!3m2!1spt-BR!2sbr!4v1772217284018!5m2!1spt-BR!2sbr" 
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

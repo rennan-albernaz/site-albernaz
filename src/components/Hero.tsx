@@ -52,7 +52,7 @@ export default function Hero() {
                 const el = document.getElementById('contato')
                 if (el) el.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="btn-primary"
+              className="btn-primary !text-white"
             >
               Solicitar Orçamento
             </button>

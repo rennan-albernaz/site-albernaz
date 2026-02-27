@@ -1,13 +1,50 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 const highlights = [
-  { icon: '📃', title: 'Certificação', text: 'Produtos certificados pelos mais rigorosos padrões nacionais e internacionais, incluindo IEC 61439 e ABNT NBR IEC 60439.' },
-  { icon: '📞', title: 'Suporte', text: 'Atendimento técnico disponível 24 horas por dia, 7 dias por semana, para garantir a continuidade da sua operação.' },
-  { icon: '🔧', title: 'ASTEC', text: 'Assistência Técnica Autorizada WEG. Suporte especializado em inversores de frequência e soft-starters de baixa tensão.' },
+  { icon: '/assets/certificacao.jpg', title: 'Certificação', text: 'Produtos certificados pelos mais rigorosos padrões nacionais e internacionais, incluindo IEC 61439 e ABNT NBR IEC 60439.' },
+  { icon: '/assets/suporte.jpg', title: 'Suporte', text: 'Atendimento técnico disponível 24 horas por dia, 7 dias por semana, para garantir a continuidade da sua operação.' },
+  { icon: '/assets/helder.jpg', title: 'ASTEC', text: 'Assistência Técnica Autorizada WEG. Suporte especializado em inversores de frequência e soft-starters de baixa tensão.' },
+  { icon: '/assets/automacao.jpg', title: 'Automação Industrial', text: 'Soluções de automação industrial para otimizar processos e aumentar a eficiência operacional.' },
 ]
 
+
 export default function QuemSomos() {
+  // Efeito de zoom on scroll para a imagem CNC
+  // CSS flip card
+  const flipCardStyle = `
+      .flip-card {
+        perspective: 1000px;
+      }
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.7s;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg) scale(1.08);
+        z-index: 10;
+      }
+      .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 1.5rem;
+        overflow: hidden;
+      }
+      .flip-card-back {
+        background: #fff;
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    `;
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -17,9 +54,7 @@ export default function QuemSomos() {
       <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-green/8 blur-3xl pointer-events-none" />
 
       <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-10">
-
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-
+        <div className="grid lg:grid-cols-2 gap-28 items-center">
           {/* ── Left – Text ──────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -52,17 +87,6 @@ export default function QuemSomos() {
                 com controle total de qualidade em cada etapa.
               </p>
             </div>
-
-            {/* Highlights */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {highlights.map((h) => (
-                <div key={h.title} className="glass-card rounded-2xl p-4">
-                  <div className="text-2xl mb-2">{h.icon}</div>
-                  <p className="font-semibold text-gray-900 text-sm mb-1">{h.title}</p>
-                  <p className="text-gray-500 text-xs leading-relaxed">{h.text}</p>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* ── Right – Image ────────────────────────────────── */}
@@ -72,35 +96,86 @@ export default function QuemSomos() {
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            {/* Main video */}
-            <div className="relative rounded-3xl overflow-hidden h-[560px] bg-gray-100 border border-gray-200">
-              <video
+            {/* Main image */}
+            <div className="relative rounded-3xl overflow-visible h-[650px] bg-gray-100 border border-gray-200 flex items-center justify-center">
+              <img
                 src="/assets/cnc.jpeg"
-                className="absolute inset-0 w-full h-full object-cover"
-                controls
-                autoPlay
-                loop
-                muted
-                playsInline
-                poster="/assets/cnc.jpeg"
-              >
-                Seu navegador não suporta o elemento de vídeo.
-              </video>
-              {/* Corner accent */}
-              <div className="absolute top-4 left-4 bg-white/90 border border-green/30 rounded-xl px-3 py-1.5 text-xs font-semibold text-green">
-                Padrão Albernaz
-              </div>
+                alt="CNC em funcionamento"
+                className="w-[110%] h-[110%] object-cover rounded-3xl shadow-xl"
+              />
             </div>
 
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -right-6 glass-card rounded-2xl p-4 text-center shadow-xl">
-              <p className="font-display font-bold text-3xl text-green">25+</p>
-              <p className="text-xs text-gray-500 mt-0.5">Anos de mercado</p>
+            {/* Floating badge reduzido e mais deslocado */}
+            <div className="absolute -bottom-16 -right-20 glass-card rounded-2xl p-4 text-center shadow-2xl border border-green/40 bg-white/95 min-w-[120px] min-h-[60px] flex flex-col items-center justify-center">
+              <p className="font-display font-extrabold text-3xl text-green drop-shadow-lg">25+</p>
+              <p className="text-xs text-gray-600 mt-1 font-semibold">Anos no mercado</p>
             </div>
 
             {/* Glow */}
             <div className="absolute inset-0 rounded-3xl bg-green/5 blur-2xl -z-10 scale-110" />
           </motion.div>
+        </div>
+
+        {/* Highlights moved below both columns, now full-width and visually enhanced */}
+        <div className="mt-16 flex flex-col items-center">
+          <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-24">
+            {highlights.map((h) => (
+              ['ASTEC', 'Certificação', 'Suporte', 'Automação Industrial'].includes(h.title) ? (
+                <div
+                  key={h.title}
+                  className="flip-card"
+                  style={{ minHeight: '420px', minWidth: '260px' }}
+                >
+                  <style>{flipCardStyle}</style>
+                  <div className="flip-card-inner rounded-3xl shadow-2xl w-full h-full border-4" style={{ borderColor: 'rgba(34,197,94,0.35)' }}>
+                    {/* Front face */}
+                    <div className="flip-card-front bg-black bg-opacity-60 flex flex-col items-center justify-center">
+                      <img
+                        src={h.icon}
+                        alt={h.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-60" />
+                      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-8">
+                        <p className="font-bold text-white text-2xl mb-1 text-center">
+                          {h.title === 'Automação Industrial' ? (<><span>Automação</span><br /><span>Industrial</span></>) : h.title}
+                        </p>
+                        <div style={{ width: '48px', height: '4px', backgroundColor: 'rgba(34,197,94,0.35)', borderRadius: '2px', margin: '0 auto', marginTop: '4px' }} />
+                      </div>
+                    </div>
+                    {/* Back face */}
+                    <div className="flip-card-back relative">
+                      {/* Botão seta canto superior direito */}
+                      <button
+                        type="button"
+                        className="absolute top-4 right-4 bg-green-100 hover:bg-green-200 text-green-700 rounded-full p-2 shadow transition-colors duration-200"
+                        aria-label="Ver mais"
+                        tabIndex={0}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 7l-10 10M17 17V7H7" />
+                        </svg>
+                      </button>
+                      <p className="font-bold text-green-900 text-2xl mb-2 text-center">
+                        {h.title === 'Automação Industrial' ? (<><span>Automação</span><br /><span>Industrial</span></>) : h.title}
+                      </p>
+                      <p className="text-gray-700 text-base leading-relaxed text-center px-6">{h.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  key={h.title}
+                  className="relative bg-gradient-to-br from-green-100/80 via-white to-green-50/80 border-2 border-green/30 shadow-xl rounded-3xl p-6 flex flex-col items-center transition-transform hover:scale-105 hover:shadow-2xl duration-300"
+                >
+                  <div className="text-4xl mb-3 drop-shadow-lg">{h.icon}</div>
+                  <p className="font-bold text-green-900 text-lg mb-1 text-center">{h.title}</p>
+                  <p className="text-gray-700 text-sm leading-relaxed text-center">{h.text}</p>
+                  <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md border-2 border-white/80 opacity-80 pointer-events-none select-none" style={{display: h.title === 'Certificação' ? 'block' : 'none'}}>★</div>
+                </div>
+              )
+            ))}
+          </div>
         </div>
       </div>
     </section>

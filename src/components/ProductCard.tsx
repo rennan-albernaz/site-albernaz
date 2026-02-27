@@ -180,7 +180,7 @@ export default function ProductCard({ product }: Props) {
                   <div className="flex flex-col gap-2 mt-auto pt-2">
                     <a
                       href={`mailto:contato@albernazelectric.com.br?subject=Orçamento – ${product.name}`}
-                      className="btn-primary justify-center text-xs"
+                      className="btn-primary justify-center text-xs !text-white"
                     >
                       Solicitar Orçamento
                     </a>

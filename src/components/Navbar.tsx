@@ -119,7 +119,7 @@ export default function Navbar() {
             <a
               href="/#contato"
               onClick={() => handleNavClick('/#contato')}
-              className={`btn-primary ml-8 ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white'}`}
+              className={`btn-primary ml-8 !text-white ${isSobreImagemFundo ? '!bg-white/10 !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !border-gray-200 hover:!bg-green hover:!text-white'}`}
             >
               Solicitar Orçamento
             </a>
@@ -171,7 +171,7 @@ export default function Navbar() {
                 )}
               <button
                 onClick={() => handleNavClick('/#contato')}
-                className={`btn-primary self-start ${isSobreImagemFundo ? '!bg-white/10 !text-white !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !text-gray-800 !border-gray-200 hover:!bg-green hover:!text-white'}`}
+                className={`btn-primary self-start !text-white ${isSobreImagemFundo ? '!bg-white/10 !border-white/40 hover:!bg-green hover:!text-white' : '!bg-white !border-gray-200 hover:!bg-green hover:!text-white'}`}
               >
                 Solicitar Orçamento
               </button>
