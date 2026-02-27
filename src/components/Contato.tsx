@@ -21,11 +21,11 @@ export default function Contato() {
   }
 
   const contactInfo = [
-    { icon: '📍', label: 'Fábrica', value: 'João Pinheiro – MG, Brasil' },
-    { icon: '🏪', label: 'Loja Elétrica', value: 'João Pinheiro - MG, Brasil' },
-    { icon: '🏭', label: 'Filial', value: 'Catalão – GO, Brasil' },
-    { icon: '📞', label: 'Telefone', value: '+55 (38) 3561-4522' },
-    { icon: '✉️', label: 'E-mail', value: 'vendas@albernazelectric.com.br' },
+    { icon: 'fabrica', img: '/assets/fabrica.png', label: 'Fábrica', value: 'João Pinheiro – MG, Brasil' },
+    { icon: 'fabrica2', img: '/assets/loja.png', label: 'Loja Elétrica', value: 'João Pinheiro - MG, Brasil' },
+    { icon: 'fabrica3', img: '/assets/loja.png', label: 'Filial', value: 'Catalão – GO, Brasil' },
+    { icon: 'fabrica4', img: '/assets/telefone.png', label: 'Telefone', value: '+55 (38) 3561-4522' },
+    { icon: 'fabrica5', img: '/assets/email.png', label: 'E-mail', value: 'vendas@albernazelectric.com.br' },
   ]
 
   return (
@@ -134,7 +134,12 @@ export default function Contato() {
           >
             {contactInfo.map((info) => (
               <div key={info.label} className="glass-card rounded-2xl px-5 py-4 flex items-center gap-4">
-                <span className="text-2xl">{info.icon}</span>
+                <img
+                  src={info.img}
+                  alt={info.label}
+                  style={{ width: 40, height: 40, objectFit: 'contain' }}
+                  className="rounded-md"
+                />
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider">{info.label}</p>
                   <p className="text-sm text-gray-900 font-medium mt-0.5">{info.value}</p>
@@ -190,7 +195,7 @@ export default function Contato() {
             {/* Mapa com localização da Albernaz */}
             <div className="glass-card rounded-2xl overflow-hidden aspect-video">
               <iframe
-                src="https://www.google.com/maps/d/embed?mid=1MwegHLXEEx3f9xu89gMeFNcTghQonNY"
+                src="https://www.google.com/maps/d/embed?mid=1MwegHLXEEx3f9xu89gMeFNcTghQonNY&ehbc=2E312F"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
