@@ -117,49 +117,55 @@ export default function QuemSomos() {
         </div>
 
         {/* Highlights moved below both columns, now full-width and visually enhanced */}
-        <div className="mt-16 flex flex-col items-center">
-          <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-24">
+        <div className="mt-16 flex flex-col items-center justify-center w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-32 xl:gap-48 justify-items-center">
             {highlights.map((h) => (
               ['ASTEC', 'Certificação', 'Suporte', 'Automação Industrial'].includes(h.title) ? (
                 <div
                   key={h.title}
-                  className="flip-card"
-                  style={{ minHeight: '420px', minWidth: '260px' }}
+                  className="group relative rounded-3xl shadow-2xl border-4 overflow-hidden cursor-pointer transition-all duration-300 mx-auto"
+                  style={{ width: '300px', height: '420px', borderColor: 'rgba(34,197,94,0.35)', transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.width = '340px';
+                    e.currentTarget.style.height = '470px';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.width = '300px';
+                    e.currentTarget.style.height = '420px';
+                  }}
                 >
-                  <style>{flipCardStyle}</style>
-                  <div className="flip-card-inner rounded-3xl shadow-2xl w-full h-full border-4" style={{ borderColor: 'rgba(34,197,94,0.35)' }}>
-                    {/* Front face */}
-                    <div className="flip-card-front bg-black bg-opacity-60 flex flex-col items-center justify-center">
-                      <img
-                        src={h.icon}
-                        alt={h.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-60" />
-                      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full p-8">
-                        <p className="font-bold text-white text-2xl mb-1 text-center">
-                          {h.title === 'Automação Industrial' ? (<><span>Automação</span><br /><span>Industrial</span></>) : h.title}
-                        </p>
-                        <div style={{ width: '48px', height: '4px', backgroundColor: 'rgba(34,197,94,0.35)', borderRadius: '2px', margin: '0 auto', marginTop: '4px' }} />
-                      </div>
-                    </div>
-                    {/* Back face */}
-                    <div className="flip-card-back relative">
-                      {/* Botão seta canto superior direito */}
-                      <button
-                        type="button"
-                        className="absolute top-4 right-4 bg-green-100 hover:bg-green-200 text-green-700 rounded-full p-2 shadow transition-colors duration-200"
-                        aria-label="Ver mais"
-                        tabIndex={0}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 7l-10 10M17 17V7H7" />
-                        </svg>
-                      </button>
-                      <p className="font-bold text-green-900 text-2xl mb-2 text-center">
+                  <img
+                    src={h.icon}
+                    alt={h.title}
+                    className="absolute inset-0 w-full h-full object-cover z-0 transition-all duration-300 group-hover:scale-110 group-hover:opacity-30"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+                  <div className="relative z-20 flex flex-col items-center justify-center w-full h-full p-8">
+                    <p className="font-bold text-white text-2xl mb-1 text-center">
+                      {h.title === 'Automação Industrial' ? (<><span>Automação</span><br /><span>Industrial</span></>) : h.title}
+                    </p>
+                    <div style={{ width: '48px', height: '4px', backgroundColor: 'rgba(34,197,94,0.35)', borderRadius: '2px', margin: '0 auto', marginTop: '4px' }} />
+                  </div>
+                  {/* Sobreposição ao expandir */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-white px-10 py-12 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-30">
+                    {/* Botão seta canto superior direito */}
+                    <button
+                      type="button"
+                      className="absolute top-5 right-5 bg-green-100 hover:bg-green-200 text-green-700 rounded-full p-2 shadow transition-colors duration-200"
+                      aria-label="Ver mais"
+                      tabIndex={0}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 7l-10 10M17 17V7H7" />
+                      </svg>
+                    </button>
+                    <div className="flex flex-col justify-center h-full w-full pt-8 pb-4 px-2 lg:px-8">
+                      <p className="font-bold text-green-900 text-2xl mb-4 text-center leading-tight">
                         {h.title === 'Automação Industrial' ? (<><span>Automação</span><br /><span>Industrial</span></>) : h.title}
                       </p>
-                      <p className="text-gray-700 text-base leading-relaxed text-center px-6">{h.text}</p>
+                      <p className="text-gray-700 text-base leading-relaxed text-center mx-auto w-full" style={{minHeight: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '0.5rem', paddingRight: '0.5rem'}}>
+                        {h.text}
+                      </p>
                     </div>
                   </div>
                 </div>
