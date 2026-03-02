@@ -135,31 +135,17 @@ export default function Contato() {
             {contactInfo.map((info) => (
               <div
                 key={info.label}
-                className="group relative glass-card rounded-2xl px-5 py-4 flex items-center gap-4 transition-all duration-300 cursor-pointer overflow-hidden"
-                style={{ minHeight: 64 }}
+                className="glass-card rounded-2xl px-5 py-4 flex items-center gap-4 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-green/30 cursor-pointer"
               >
                 <img
                   src={info.img}
                   alt={info.label}
                   style={{ width: 40, height: 40, objectFit: 'contain' }}
-                  className="rounded-md z-10 transition-all duration-300 group-hover:scale-110 group-hover:opacity-30"
+                  className="rounded-md transition-transform duration-300"
                 />
-                <div className="z-10">
+                <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider">{info.label}</p>
                   <p className="text-sm text-gray-900 font-medium mt-0.5">{info.value}</p>
-                </div>
-                {/* Sobreposição ao expandir */}
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 px-6 py-8 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 z-20"
-                >
-                  <img
-                    src={info.img}
-                    alt={info.label}
-                    style={{ width: 56, height: 56, objectFit: 'contain' }}
-                    className="rounded-md mb-3"
-                  />
-                  <p className="text-base text-green-700 font-bold mb-1">{info.label}</p>
-                  <p className="text-sm text-gray-700 text-center">{info.value}</p>
                 </div>
               </div>
             ))}

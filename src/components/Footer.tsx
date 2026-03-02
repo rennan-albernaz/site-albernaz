@@ -60,9 +60,9 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-gray-200 bg-gray-900 mt-0">
+    <footer className="relative border-t border-green-dark bg-green mt-0">
       {/* Top divider glow */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green/30 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
         {/* Main grid */}
@@ -72,7 +72,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img src="/assets/logo-branca.png" alt="Logo Branca" className="h-8 lg:h-8 w-auto object-contain" />
             </div>
-            <p className="text-sm text-white/45 leading-relaxed max-w-xs">
+            <p className="text-sm text-white leading-relaxed max-w-xs">
               Fabricante brasileiro de painéis elétricos de alta performance.
               Unidades em João Pinheiro – MG e Catalão – GO.
             </p>
@@ -84,7 +84,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-green/50 transition-all"
+                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-white transition-all"
                   aria-label={s.label}
                 >
                   {s.svg}
@@ -96,21 +96,21 @@ export default function Footer() {
           {/* Links columns */}
           {Object.entries(footerLinks).map(([section, links]) => (
             <div key={section}>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">{section}</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">{section}</h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     {link.href.startsWith('/#') ? (
                       <button
                         onClick={() => handleAnchor(link.href)}
-                        className="text-sm text-white/55 hover:text-white transition-colors text-left"
+                        className="text-sm text-white hover:text-white transition-colors text-left"
                       >
                         {link.label}
                       </button>
                     ) : (
                       <Link
                         to={link.href}
-                        className="text-sm text-white/55 hover:text-white transition-colors"
+                        className="text-sm text-white hover:text-white transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -124,19 +124,19 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30 text-center sm:text-left">
+          <p className="text-xs text-white text-center sm:text-left">
             © {new Date().getFullYear()} Grupo Albernaz Electric. Todos os direitos reservados.
             <span className="mx-2">·</span>
             CNPJ: 12.671.439/0001-25 (Matriz)
           </p>
           <div className="flex gap-5">
-            <a href="#" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+            <a href="#" className="text-xs text-white hover:text-white transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+            <a href="#" className="text-xs text-white hover:text-white transition-colors">
               Termos de Uso
             </a>
-            <a href="#" className="text-xs text-white/30 hover:text-white/60 transition-colors">
+            <a href="#" className="text-xs text-white hover:text-white transition-colors">
               Cookies
             </a>
           </div>
