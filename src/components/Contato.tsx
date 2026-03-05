@@ -5,13 +5,22 @@ export default function Contato() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [sent, setSent] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
+  const [form, setForm] = useState({ 
+    companyName: '', 
+    cnpj: '', 
+    contactName: '', 
+    position: '', 
+    email: '', 
+    phone: '', 
+    subject: '', 
+    message: '' 
+  })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // In production: replace with real API call / EmailJS / Formspree
     const body = encodeURIComponent(
-      `Nome: ${form.name}\nTelefone: ${form.phone}\n\n${form.message}`
+      `Nome da Empresa: ${form.companyName}\nCNPJ: ${form.cnpj || 'Não informado'}\nNome do Contatante: ${form.contactName}\nCargo: ${form.position || 'Não informado'}\nE-mail: ${form.email}\nTelefone: ${form.phone}\n\n${form.message}`
     )
     window.open(
       `mailto:vendas@albernazelectric.com.br?subject=${encodeURIComponent(form.subject || 'Contato via Site')}&body=${body}`
@@ -58,43 +67,83 @@ export default function Contato() {
             onSubmit={handleSubmit}
             className="bg-white rounded-3xl border border-gray-200 shadow-sm p-8 flex flex-col gap-4"
           >
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-gray-500 font-medium">Nome da Empresa *</label>
+              <input
+                required
+                value={form.companyName}
+                onChange={(e) => setForm({ ...form, companyName: e.target.value })}
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
+                placeholder="Nome da sua empresa"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-gray-500 font-medium">CNPJ</label>
+              <input
+                value={form.cnpj}
+                onChange={(e) => setForm({ ...form, cnpj: e.target.value })}
+                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
+                placeholder="00.000.000/0000-00"
+              />
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-gray-500 font-medium">Nome *</label>
+                <label className="text-xs text-gray-500 font-medium">Nome do Contatante *</label>
                 <input
                   required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  value={form.contactName}
+                  onChange={(e) => setForm({ ...form, contactName: e.target.value })}
                   className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
-                  placeholder="Seu nome completo"
+                  placeholder="Seu nome"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-gray-500 font-medium">Telefone</label>
+                <label className="text-xs text-gray-500 font-medium">Cargo</label>
+                <select
+                  value={form.position}
+                  onChange={(e) => setForm({ ...form, position: e.target.value })}
+                  className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-green/60 transition-colors appearance-none"
+                >
+                  <option value="">Selecione seu cargo</option>
+                  <option value="Diretor">Diretor</option>
+                  <option value="Gerente">Gerente</option>
+                  <option value="Engenheiro">Engenheiro</option>
+                  <option value="Vendedor">Vendedor</option>
+                  <option value="Outros">Outros</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs text-gray-500 font-medium">Telefone *</label>
                 <input
+                  required
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
                   placeholder="(00) 00000-0000"
                 />
               </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs text-gray-500 font-medium">E-mail *</label>
+                <input
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
+                  placeholder="seu@email.com"
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-gray-500 font-medium">E-mail *</label>
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green/60 transition-colors"
-                placeholder="seu@email.com"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-gray-500 font-medium">Assunto</label>
+              <label className="text-xs text-gray-500 font-medium">Assunto *</label>
               <select
+                required
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
                 className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-green/60 transition-colors appearance-none"
@@ -182,7 +231,7 @@ export default function Contato() {
 
                 {/* WhatsApp */}
                 <a
-                  href="https://wa.me/5538999990000"
+                  href="https://wa.me/553835614522"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#25D366] hover:border-[#25D366]/50 transition-all"

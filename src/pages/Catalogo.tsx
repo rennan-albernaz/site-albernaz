@@ -4,14 +4,31 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ProductCard from '../components/ProductCard'
-import { products, categories, type Category } from '../assets/productsData'
+import { getProducts, getCategories, initializeProducts } from '../utils/productManager'
 
 const PAGE_SIZE = 12
 
 export default function Catalogo() {
-  const [activeCategory, setActiveCategory] = useState<Category>('Todos')
+  // Inicializar produtos no primeiro carregamento
+  useEffect(() => {
+    initializeProducts()
+  }, [])
+
+  const [activeCategory, setActiveCategory] = useState<string>('Todos')
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
+  const [products, setProducts] = useState(() => getProducts())
+  const [categories, setCategories] = useState(() => ['Todos', ...getCategories()])
+
+  // Recarregar produtos quando voltar para a página
+  useEffect(() => {
+    const handleFocus = () => {
+      setProducts(getProducts())
+      setCategories(['Todos', ...getCategories()])
+    }
+    window.addEventListener('focus', handleFocus)
+    return () => window.removeEventListener('focus', handleFocus)
+  }, [])
 
   // Filter
   const filtered = useMemo(() => {
@@ -24,7 +41,7 @@ export default function Catalogo() {
       )
     }
     return list
-  }, [activeCategory, search])
+  }, [activeCategory, search, products])
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)

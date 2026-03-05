@@ -19,6 +19,20 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   const [open, setOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Coletar todas as imagens (principal + adicionais)
+  const allImages = []
+  if (product.image) allImages.push(product.image)
+  if ((product as any).additionalImages) {
+    allImages.push(...(product as any).additionalImages)
+  }
+
+  // Coletar campos customizados (que não são padrão)
+  const standardFields = ['id', 'name', 'category', 'description', 'image', 'dimensions', 'weight', 'voltage', 'certificacao', 'additionalImages']
+  const customFields = Object.entries(product)
+    .filter(([key]) => !standardFields.includes(key))
+    .map(([key, value]) => ({ key, value: String(value) }))
 
   return (
     <>
@@ -114,30 +128,74 @@ export default function ProductCard({ product }: Props) {
               <div className="grid md:grid-cols-2">
                 {/* Image panel */}
                 <div
-                  className="bg-gray-100 aspect-square md:aspect-auto flex items-center justify-center min-h-[260px]"
+                  className="bg-gray-100 aspect-square md:aspect-auto flex flex-col items-center justify-center min-h-[260px] relative"
                   style={{ padding: 0, margin: 0, border: 'none', height: '100%', display: 'flex', overflow: 'hidden' }}
                 >
-                  {product.image ? (
-                    product.image.endsWith('.mp4') ? (
-                      <video
-                        src={product.image}
-                        className="w-full h-full pointer-events-none select-none"
-                        style={{ width: '100% !important', height: '100% !important', objectFit: 'cover', objectPosition: 'center' }}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        poster="/assets/cnc.jpeg"
-                        tabIndex={-1}
-                        controls={false}
-                        disablePictureInPicture
-                        controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
-                      >
-                        Seu navegador não suporta o elemento de vídeo.
-                      </video>
-                    ) : (
-                      <img src={product.image} alt={product.name} className="max-w-full max-h-64 object-contain" />
-                    )
+                  {allImages.length > 0 ? (
+                    <>
+                      {allImages[currentImageIndex]?.endsWith('.mp4') ? (
+                        <video
+                          src={allImages[currentImageIndex]}
+                          className="w-full h-full pointer-events-none select-none"
+                          style={{ width: '100% !important', height: '100% !important', objectFit: 'cover', objectPosition: 'center' }}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          poster="/assets/cnc.jpeg"
+                          tabIndex={-1}
+                          controls={false}
+                          disablePictureInPicture
+                          controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+                        >
+                          Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                      ) : (
+                        <img src={allImages[currentImageIndex]} alt={product.name} className="max-w-full max-h-64 object-contain" />
+                      )}
+                      
+                      {/* Navegação de imagens */}
+                      {allImages.length > 1 && (
+                        <>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1))
+                            }}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
+                          >
+                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setCurrentImageIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1))
+                            }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
+                          >
+                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                            {allImages.map((_, idx) => (
+                              <button
+                                key={idx}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  setCurrentImageIndex(idx)
+                                }}
+                                className={`w-2 h-2 rounded-full transition-colors ${
+                                  idx === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </>
                   ) : (
                     <div className="text-gray-300 text-4xl font-display font-black">Sem imagem</div>
                   )}
@@ -168,13 +226,21 @@ export default function ProductCard({ product }: Props) {
                         </div>
                       ))}
 
-                    {/* Certificação na mesma linha, separado por espaço */}
+                    {/* Certificação */}
                     {product.certificacao && (
                       <div className="flex justify-between text-sm border-b border-gray-100 pb-1.5">
                         <span className="text-gray-400">Certificação</span>
                         <span className="text-gray-900 font-medium ml-1">{product.certificacao}</span>
                       </div>
                     )}
+
+                    {/* Campos Customizados */}
+                    {customFields.map(({ key, value }) => (
+                      <div key={key} className="flex justify-between text-sm border-b border-gray-100 pb-1.5">
+                        <span className="text-gray-400 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span className="text-gray-900 font-medium">{value}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="flex flex-col gap-2 mt-auto pt-2">

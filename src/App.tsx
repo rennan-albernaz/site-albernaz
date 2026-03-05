@@ -2,6 +2,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Catalogo from './pages/Catalogo';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 import CookiePopup from './components/CookiePopup';
 
 export default function App() {
@@ -11,6 +13,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/produtos" element={<Catalogo />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           {/* 404 fallback */}
           <Route
             path="*"

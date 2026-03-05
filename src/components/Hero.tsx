@@ -10,6 +10,23 @@ export default function Hero() {
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden flex flex-col">
 
+      {/* ── Admin Button (hover to reveal) ───────────────────── */}
+      <div className="absolute top-0 right-0 z-50 group">
+        {/* Área sensível invisível no canto */}
+        <div className="w-14 h-14 cursor-pointer" />
+        
+        {/* Botão que aparece no hover */}
+        <Link 
+          to="/admin/login" 
+          className="absolute top-4 right-4 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 pointer-events-none group-hover:pointer-events-auto"
+          title="Acesso Admin"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+          </svg>
+        </Link>
+      </div>
+
       {/* ── Video background ─────────────────────────────────── */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
@@ -106,7 +123,7 @@ export default function Hero() {
 
         {/* WhatsApp */}
         <a
-          href="https://wa.me/5538999990000"
+          href="https://wa.me/553835614522"
           target="_blank"
           rel="noopener noreferrer"
           className="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#25D366] hover:border-white transition-all"
