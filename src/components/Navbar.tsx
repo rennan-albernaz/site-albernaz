@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
@@ -16,6 +16,7 @@ export default function Navbar() {
   const [isSobreImagemFundo, setIsSobreImagemFundo] = useState(true)
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   // Detecta se está na subpágina de produtos (Catalogo)
   const isCatalogo = location.pathname === '/produtos' || location.pathname === '/catalogo';
@@ -59,8 +60,20 @@ export default function Navbar() {
     setOpen(false)
     if (href.startsWith('/#')) {
       const id = href.replace('/#', '')
-      const el = document.getElementById(id)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      
+      // Se não estiver na home, navega para a home primeiro
+      if (location.pathname !== '/') {
+        navigate('/')
+        // Aguarda a navegação e então faz o scroll
+        setTimeout(() => {
+          const el = document.getElementById(id)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
+      } else {
+        // Se já estiver na home, faz o scroll direto
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }
 

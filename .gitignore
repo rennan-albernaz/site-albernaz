@@ -1,12 +1,12 @@
-# Ignorar pastas de build e dependências
+# pastas de build e dependências
 node_modules/
 dist/
 build/
 
-# Ignorar arquivos pesados de mídia
-*.mp4
+# arquivos pesados de mídia
+
 *.mov
 *.avi
 
-# Ignorar arquivos de configuração local/senhas
+# arquivos de configuração local/senhas
 .env

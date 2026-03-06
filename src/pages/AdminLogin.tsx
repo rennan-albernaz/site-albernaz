@@ -5,25 +5,16 @@ import { motion } from 'framer-motion';
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
     
-    // Credenciais padrão (você pode alterar conforme necessário)
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'albernaz2026';
-
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Salvar token de autenticação
-      localStorage.setItem('adminAuth', 'true');
-      localStorage.setItem('adminLoginTime', Date.now().toString());
-      navigate('/admin/dashboard');
-    } else {
-      setError('Usuário ou senha incorretos');
-      setTimeout(() => setError(''), 3000);
-    }
+    // Login livre - aceita qualquer usuário e senha
+    // Salvar token de autenticação
+    localStorage.setItem('adminAuth', 'true');
+    localStorage.setItem('adminLoginTime', Date.now().toString());
+    navigate('/admin/dashboard');
   };
 
   return (
@@ -74,16 +65,6 @@ export default function AdminLogin() {
               required
             />
           </div>
-
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm"
-            >
-              {error}
-            </motion.div>
-          )}
 
           <button
             type="submit"
