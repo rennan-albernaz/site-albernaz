@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 const highlights = [
   { icon: '/assets/certificacao.jpg', title: 'Certificação', text: 'Produtos certificados pelos mais rigorosos padrões nacionais e internacionais, incluindo IEC 61439 e ABNT NBR IEC 60439.' },
@@ -10,41 +10,6 @@ const highlights = [
 
 
 export default function QuemSomos() {
-  // Efeito de zoom on scroll para a imagem CNC
-  // CSS flip card
-  const flipCardStyle = `
-      .flip-card {
-        perspective: 1000px;
-      }
-      .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.7s;
-        transform-style: preserve-3d;
-        will-change: transform;
-      }
-      .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg) scale(1.08);
-        z-index: 10;
-      }
-      .flip-card-front, .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        border-radius: 1.5rem;
-        overflow: hidden;
-      }
-      .flip-card-back {
-        background: #fff;
-        transform: rotateY(180deg);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-    `;
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 

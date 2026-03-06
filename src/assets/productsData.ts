@@ -70,5 +70,4 @@ export const products: Product[] = [
       certificacao: 'ISO 9001',
       description: 'Armário metálico montável IP65, estrutura modular em chapa de 1,5mm, acabamento RAL 7035.'
     },
-    // Adicione outros produtos manualmente abaixo, editando cada campo conforme necessário
   ];

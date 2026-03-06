@@ -9,9 +9,6 @@ export default function AdminLogin() {
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
-    
-    // Login livre - aceita qualquer usuário e senha
-    // Salvar token de autenticação
     localStorage.setItem('adminAuth', 'true');
     localStorage.setItem('adminLoginTime', Date.now().toString());
     navigate('/admin/dashboard');

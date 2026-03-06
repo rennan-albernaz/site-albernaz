@@ -9,7 +9,6 @@ import { getProducts, getCategories, initializeProducts } from '../utils/product
 const PAGE_SIZE = 12
 
 export default function Catalogo() {
-  // Inicializar produtos no primeiro carregamento
   useEffect(() => {
     initializeProducts()
   }, [])
@@ -20,7 +19,6 @@ export default function Catalogo() {
   const [products, setProducts] = useState(() => getProducts())
   const [categories, setCategories] = useState(() => ['Todos', ...getCategories()])
 
-  // Recarregar produtos quando voltar para a página
   useEffect(() => {
     const handleFocus = () => {
       setProducts(getProducts())
@@ -30,7 +28,6 @@ export default function Catalogo() {
     return () => window.removeEventListener('focus', handleFocus)
   }, [])
 
-  // Filter
   const filtered = useMemo(() => {
     let list = products
     if (activeCategory !== 'Todos') list = list.filter((p) => p.category === activeCategory)
@@ -46,10 +43,8 @@ export default function Catalogo() {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
-  // Reset page on filter change
   useEffect(() => { setPage(1) }, [activeCategory, search])
 
-  // Scroll to top on mount
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   const pageNumbers = () => {

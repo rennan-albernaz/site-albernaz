@@ -18,32 +18,27 @@ export default function Navbar() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Detecta se está na subpágina de produtos (Catalogo)
   const isCatalogo = location.pathname === '/produtos' || location.pathname === '/catalogo';
 
-  // Detecta se a Navbar está sobre a imagem do catálogo ou sobre o vídeo da home
   useEffect(() => {
     if (isCatalogo) {
-      // Checa se está sobre a imagem do catálogo
       function onScroll() {
         const nav = document.querySelector('header');
         const section = document.querySelector('section');
         if (!nav || !section) return setIsSobreImagemFundo(false);
         const navRect = nav.getBoundingClientRect();
         const sectionRect = section.getBoundingClientRect();
-        // Se a navbar está dentro da altura da section (imagem de fundo)
         setIsSobreImagemFundo(navRect.bottom > sectionRect.top && navRect.top < sectionRect.bottom);
       }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
       return () => window.removeEventListener('scroll', onScroll);
     } else {
-      // Home: vídeo
       const home = document.getElementById('home');
       const quemSomos = document.getElementById('quem-somos');
       if (!home || !quemSomos) return;
       function onScroll() {
-        const navHeight = 96; // altura da navbar (h-24 = 6rem = 96px)
+        const navHeight = 96;
         const quemSomosRect = quemSomos ? quemSomos.getBoundingClientRect() : { top: 9999 };
         setIsSobreImagemFundo(quemSomosRect.top > navHeight);
       }
@@ -53,7 +48,6 @@ export default function Navbar() {
     }
   }, [isCatalogo]);
 
-  // Close mobile menu on route change
   useEffect(() => { setOpen(false) }, [location])
 
   const handleNavClick = (href: string) => {
@@ -61,23 +55,18 @@ export default function Navbar() {
     if (href.startsWith('/#')) {
       const id = href.replace('/#', '')
       
-      // Se não estiver na home, navega para a home primeiro
       if (location.pathname !== '/') {
         navigate('/')
-        // Aguarda a navegação e então faz o scroll
         setTimeout(() => {
           const el = document.getElementById(id)
           if (el) el.scrollIntoView({ behavior: 'smooth' })
         }, 100)
       } else {
-        // Se já estiver na home, faz o scroll direto
         const el = document.getElementById(id)
         if (el) el.scrollIntoView({ behavior: 'smooth' })
       }
     }
   }
-
-  // isSobreImagemFundo: true = logo-branca, false = logo.png
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none">

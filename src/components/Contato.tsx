@@ -18,7 +18,6 @@ export default function Contato() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // In production: replace with real API call / EmailJS / Formspree
     const body = encodeURIComponent(
       `Nome da Empresa: ${form.companyName}\nCNPJ: ${form.cnpj || 'Não informado'}\nNome do Contatante: ${form.contactName}\nCargo: ${form.position || 'Não informado'}\nE-mail: ${form.email}\nTelefone: ${form.phone}\n\n${form.message}`
     )

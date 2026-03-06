@@ -18,7 +18,6 @@ const CookiePopup: React.FC = () => {
   };
 
   const handleConfig = () => {
-    // Aqui você pode abrir um modal de configuração ou redirecionar para a política
     window.open("/politica-de-privacidade", "_blank");
   };
 

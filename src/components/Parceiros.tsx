@@ -8,7 +8,6 @@ const logos = [
   { src: '/assets/pc4.jpg', alt: 'Parceiro 4' },
 ]
 
-// Duplicate to fill the track for a seamless loop
 const track = [...logos, ...logos, ...logos, ...logos]
 
 export default function Parceiros() {

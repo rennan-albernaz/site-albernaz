@@ -21,14 +21,12 @@ export default function ProductCard({ product }: Props) {
   const [open, setOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  // Coletar todas as imagens (principal + adicionais)
   const allImages = []
   if (product.image) allImages.push(product.image)
   if ((product as any).additionalImages) {
     allImages.push(...(product as any).additionalImages)
   }
 
-  // Coletar campos customizados (que não são padrão)
   const standardFields = ['id', 'name', 'category', 'description', 'image', 'dimensions', 'weight', 'voltage', 'certificacao', 'additionalImages']
   const customFields = Object.entries(product)
     .filter(([key]) => !standardFields.includes(key))

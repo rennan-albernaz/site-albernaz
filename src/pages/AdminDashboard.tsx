@@ -19,8 +19,6 @@ export default function AdminDashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Form states
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -34,14 +32,11 @@ export default function AdminDashboard() {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    // Verificar autenticação
     const isAuth = localStorage.getItem('adminAuth');
     if (!isAuth) {
       navigate('/admin/login');
       return;
     }
-
-    // Carregar dados
     loadData();
   }, [navigate]);
 
@@ -88,17 +83,15 @@ export default function AdminDashboard() {
 
     const productData: any = {
       ...formData,
-      image: images[0] || undefined, // Primeira imagem como principal
+      image: images[0] || undefined,
     };
 
-    // Adicionar campos customizados
     customFields.forEach(field => {
       if (field.key && field.value) {
         productData[field.key] = field.value;
       }
     });
 
-    // Adicionar imagens adicionais
     if (images.length > 1) {
       productData.additionalImages = images.slice(1);
     }
@@ -126,14 +119,12 @@ export default function AdminDashboard() {
       certificacao: product.certificacao || '',
     });
     
-    // Carregar campos customizados
     const standardFields = ['id', 'name', 'category', 'description', 'image', 'dimensions', 'weight', 'voltage', 'certificacao', 'additionalImages'];
     const custom = Object.entries(product)
       .filter(([key]) => !standardFields.includes(key))
       .map(([key, value]) => ({ key, value: String(value) }));
     setCustomFields(custom);
 
-    // Carregar imagens
     const imgs: string[] = [];
     if (product.image) imgs.push(product.image);
     if ((product as any).additionalImages) imgs.push(...(product as any).additionalImages);
